@@ -1,0 +1,1093 @@
+1
+
+   Abaqus 3DEXPERIENCE R2018x                                  Date 07-Nov-2023   Time 12:32:21
+   For use by AALTO UNIVERSITY under license from Dassault Systemes or its subsidiary.
+
+
+
+                         The Abaqus Software is a product of:
+
+                           Dassault Systemes SIMULIA Corp.
+                           1301 Atwood Avenue, Suite 101W
+                              Johnston, RI 02919, USA
+ 
+
+
+                   The Abaqus Software is available only under license
+                   from Dassault Systemes or its subsidiary and may be
+                   used or reproduced only in accordance with the terms
+                   of such license.
+ 
+                          On machine D23-0234 
+                          you are authorized to run
+                          Abaqus/Standard until 20-Feb-2024
+
+                          Your site id is: 200000000014764 
+
+
+ 
+                    For assistance or any other information you may
+                    obtain contact information for your local office
+                    from the world wide web at:
+
+                      http://www.3ds.com/products/simulia/locations/
+
+ 
+                * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+                *                                                         * 
+                *                   *****************                     * 
+                *                   *  N O T I C E  *                     * 
+                *                   *****************                     * 
+                *                                                         * 
+                *                                                         * 
+                *               Abaqus 3DEXPERIENCE R2018x                * 
+                *                                                         * 
+                *          BUILD ID: 2017_11_07-19.21.41 127140           * 
+                *                                                         * 
+                *                                                         * 
+                *  Please make sure you are using                         * 
+                *  release 3DEXPERIENCE R2018x manuals                    * 
+                *  plus the notes accompanying this release.              * 
+                *                                                         * 
+                *                                                         * 
+                *                                                         * 
+                *                                                         * 
+                *                                                         * 
+                *   This program may not be used for commercial purposes  * 
+                *           without payment of a commercial fee.          * 
+                *                                                         * 
+                * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+
+
+ 
+
+
+
+     PROCESSING PART, INSTANCE, AND ASSEMBLY INFORMATION
+   *******************************************************
+
+
+     END PROCESSING PART, INSTANCE, AND ASSEMBLY INFORMATION
+   ***********************************************************
+
+
+
+
+     OPTIONS BEING PROCESSED
+   ***************************
+
+
+  *HEADING
+          no Hydrogen, TSL over nominal Area                                                                                                                                                                                                                              
+  *INCLUDE, INPUT=_mesh.inp
+
+  *** INPUT DATA IS READ FROM FILE _mesh.inp                                                                                                                                                                                                                                                      
+
+  *NODE, NSET=ALL
+  *NSET, NSET=SOLID-W
+  *NSET, NSET=SOLID-N
+  *NSET, NSET=SOLID-SW
+  *NSET, NSET=SOLID-SE
+  *NSET, NSET=SOLID-NE
+  *NSET, NSET=SOLID-NW
+  *NSET, NSET=COHES-S, UNSORTED
+  *NSET, NSET=COHES-N, UNSORTED
+  *NSET, NSET=COHES-W
+  *ELEMENT, TYPE=COH2D4, ELSET=COHES
+  *ELEMENT, TYPE=CPE4R, ELSET=SOLID
+  *ELSET, ELSET=MAP_C, UNSORTED
+  *ELSET, ELSET=MAP_S, UNSORTED
+  *INCLUDE, INPUT=_AISI.inp
+
+  *** INPUT DATA IS READ FROM FILE _AISI.inp                                                                                                                                                                                                                                                      
+
+  *INCLUDE, INPUT=_coh.inp
+
+  *** INPUT DATA IS READ FROM FILE _coh.inp                                                                                                                                                                                                                                                       
+
+  *MATERIAL, NAME=AISI
+  *ELASTIC
+  *PLASTIC
+  *MATERIAL, NAME=COH
+  *ELASTIC, TYPE=TRACTION, DEPENDENCIES=0
+  *DAMAGE INITIATION, CRITERION=MAXE
+  *DAMAGE EVOLUTION, TYPE=DISPLACEMENT, SOFTENING=TABULAR
+  *SOLID SECTION, ELSET=SOLID, MATERIAL=AISI
+  *SOLID SECTION, ELSET=SOLID, MATERIAL=AISI
+
+ ***WARNING: FOR TWO-DIMENSIONAL MODELS, IF A NON-UNITY THICKNESS IS SPECIFIED 
+             FOR TWO-DIMENSIONAL SOLID ELEMENTS AND THESE ELEMENTS ARE INVOLVED 
+             IN AN INTERACTION SUCH AS CONTACT, THE SAME THICKNESS SHOULD BE 
+             SPECIFIED FOR THE OUT-OF-PLANE THICKNESS OF THE CORRESPONDING 
+             SURFACE UNDER *SURFACE INTERACTION.
+  *COHESIVE SECTION, ELSET=COHES, RESPONSE=TRACTION SEPARATION, MATERIAL=COH
+  *COHESIVE SECTION, ELSET=COHES, RESPONSE=TRACTION SEPARATION, MATERIAL=COH
+  *BOUNDARY
+  *BOUNDARY
+  *BOUNDARY
+  *BOUNDARY
+  *COHESIVE SECTION, ELSET=COHES, RESPONSE=TRACTION SEPARATION, MATERIAL=COH
+  *OUTPUT, FIELD, VARIABLE=PRESELECT
+  *OUTPUT, HISTORY, VARIABLE=PRESELECT
+  *OUTPUT, HISTORY
+  *ELEMENT OUTPUT, ELSET=COHES
+  *ELEMENT OUTPUT, ELSET=SOLID
+  *OUTPUT, FIELD, VARIABLE=PRESELECT
+  *OUTPUT, HISTORY, VARIABLE=PRESELECT
+  *OUTPUT, HISTORY
+  *ELEMENT OUTPUT, ELSET=COHES
+  *ELEMENT OUTPUT, ELSET=SOLID
+  *OUTPUT, FIELD, VARIABLE=PRESELECT
+  *OUTPUT, HISTORY, VARIABLE=PRESELECT
+  *OUTPUT, HISTORY
+  *ELEMENT OUTPUT, ELSET=COHES
+  *ELEMENT OUTPUT, ELSET=SOLID
+  *STEP, NAME=Step-1, INC=1000
+  *OUTPUT, FIELD, VARIABLE=PRESELECT
+  *OUTPUT, HISTORY, VARIABLE=PRESELECT
+  *OUTPUT, HISTORY
+  *STEP, NAME=Step-1, INC=1000
+  *STEP, NAME=Step-1, INC=1000
+  displacement-controlled traction                                                
+  *STATIC
+  *BOUNDARY
+  *OUTPUT, FIELD, VARIABLE=PRESELECT
+  *OUTPUT, HISTORY, VARIABLE=PRESELECT
+  *OUTPUT, HISTORY
+  *ELEMENT OUTPUT, ELSET=COHES
+  *ELEMENT OUTPUT, ELSET=SOLID
+  *NODE OUTPUT, NSET=ALL
+  *END STEP
+  *BOUNDARY
+  *STEP, NAME=Step-1, INC=1000
+  *STATIC
+  *BOUNDARY
+  *END STEP
+1
+
+   Abaqus 3DEXPERIENCE R2018x                                  Date 07-Nov-2023   Time 12:32:21
+   For use by AALTO UNIVERSITY under license from Dassault Systemes or its subsidiary.
+
+     no Hydrogen, TSL over nominal Area                                              
+
+
+                              E L E M E N T   D E F I N I T I O N S
+
+       NUMBER   TYPE    PROPERTY    NODES FORMING ELEMENT
+                        REFERENCE
+
+          1   COH2D4        2          1         2         4         3
+          2   CPE4R         1          3         4         6         5
+
+
+
+
+
+                                S O L I D   S E C T I O N (S)
+
+
+
+
+  PROPERTY NUMBER         1
+
+     MATERIAL NAME                     AISI                                                                            
+     ATTRIBUTES                          10.000       0.0000       0.0000    
+
+     HOURGLASS CONTROL STIFFNESS     423.08    
+
+     (USED WITH LOWER ORDER REDUCED INTEGRATED SOLID ELEMENTS LIKE CPS4R,CPE4RH,C3D8R)
+
+
+
+
+
+                                C O H E S I V E   S E C T I O N (S)
+
+
+
+
+  PROPERTY NUMBER         2
+
+     MATERIAL NAME       COH                                                                             
+
+     INITIAL THICKNESS    OUT-OF-PLANE WIDTH (ONLY USED BY 2D ELEMENTS)
+
+          1.0000           10.000    
+     RESPONSE = TRACTION SEPARATION
+
+
+
+
+
+                         P H Y S I C A L   C O N S T A N T S
+
+
+
+
+
+
+                         M A T E R I A L   D E S C R I P T I O N
+
+
+
+
+  MATERIAL NAME: AISI                                                                            
+
+
+     ELASTIC         YOUNG'S    POISSON'S
+                     MODULUS      RATIO
+
+                    2.20000E+05 0.30000    
+
+
+     PLASTICITY - MISES YIELD SURFACE WITH
+                  ISOTROPIC HARDENING
+
+                      STRESS      PLASTIC  
+                                  STRAIN   
+
+
+                     713.81      0.0000    
+                     736.74     1.00000E-03
+                     755.56     2.00000E-03
+                     771.58     3.00000E-03
+                     785.56     4.00000E-03
+                     798.00     5.00000E-03
+                     809.21     6.00000E-03
+                     819.43     7.00000E-03
+                     828.83     8.00000E-03
+                     837.53     9.00000E-03
+                     845.65     1.00000E-02
+                     853.26     1.10000E-02
+                     860.42     1.20000E-02
+                     867.18     1.30000E-02
+                     873.60     1.40000E-02
+                     879.70     1.50000E-02
+                     885.52     1.60000E-02
+                     891.08     1.70000E-02
+                     896.41     1.80000E-02
+                     901.53     1.90000E-02
+                     906.45     2.00000E-02
+                     911.20     2.10000E-02
+                     915.77     2.20000E-02
+                     920.19     2.30000E-02
+                     924.47     2.40000E-02
+                     928.62     2.50000E-02
+                     932.63     2.60000E-02
+                     936.53     2.70000E-02
+                     940.32     2.80000E-02
+                     944.01     2.90000E-02
+                     947.60     3.00000E-02
+                     951.09     3.10000E-02
+                     954.50     3.20000E-02
+                     957.83     3.30000E-02
+                     961.07     3.40000E-02
+                     964.25     3.50000E-02
+                     967.35     3.60000E-02
+                     970.38     3.70000E-02
+                     973.34     3.80000E-02
+                     976.25     3.90000E-02
+                     979.10     4.00000E-02
+                     1026.6     6.00000E-02
+                     1062.3     8.00000E-02
+                     1091.3     0.10000    
+                     1187.6     0.20000    
+                     1248.5     0.30000    
+                     1293.8     0.40000    
+                     1330.1     0.50000    
+                     1360.6     0.60000    
+                     1387.0     0.70000    
+                     1410.2     0.80000    
+                     1431.1     0.90000    
+                     1450.0      1.0000    
+
+
+
+  MATERIAL NAME: COH                                                                             
+
+
+     TRACTION ELASTIC CONSTANTS
+
+                         Enn            Ess    
+
+                     4.54545E+06    4.54545E+06
+
+
+     MAXE CRITERION FOR DAMAGE INITIATION
+
+             NORMAL         FIRST SHEAR  
+         NOMINAL STRAIN    NOMINAL STRAIN
+           2.20000E-04       2.20000E-04
+
+
+       DAMAGE EVOLUTION:
+
+             TYPE         SOFTENING      DEGRADATION  
+
+         DISPLACEMENT      TABULAR         MAXIMUM    
+
+           DAMAGE       EQUIVALENT 
+          VARIABLE        DISPL.   
+
+         0.00000E+00    0.00000E+00
+         9.77300E-03    2.17132E-06
+         1.95460E-02    4.38594E-06
+         2.93200E-02    6.64514E-06
+         3.90930E-02    8.95030E-06
+         4.88660E-02    1.13028E-05
+         5.86390E-02    1.37042E-05
+         6.84120E-02    1.61560E-05
+         7.81860E-02    1.86597E-05
+         8.79590E-02    2.12172E-05
+         9.77320E-02    2.38300E-05
+         1.07505E-01    2.65000E-05
+         1.17278E-01    2.92292E-05
+         1.27052E-01    3.20195E-05
+         1.36825E-01    3.48729E-05
+         1.46598E-01    3.77917E-05
+         1.56371E-01    4.07782E-05
+         1.66144E-01    4.38346E-05
+         1.75918E-01    4.69636E-05
+         1.85691E-01    5.01676E-05
+         1.95464E-01    5.34495E-05
+         2.05237E-01    5.68121E-05
+         2.15010E-01    6.02585E-05
+         2.24784E-01    6.37917E-05
+         2.34557E-01    6.74151E-05
+         2.44330E-01    7.11323E-05
+         2.54103E-01    7.49469E-05
+         2.63876E-01    7.88628E-05
+         2.73649E-01    8.28841E-05
+         2.83423E-01    8.70150E-05
+         2.93196E-01    9.12602E-05
+         3.01144E-01    9.48000E-05
+         3.02969E-01    9.56244E-05
+         3.12742E-01    1.00113E-04
+         3.22515E-01    1.04731E-04
+         3.32289E-01    1.09484E-04
+         3.42062E-01    1.14378E-04
+         3.51835E-01    1.19420E-04
+         3.61608E-01    1.24616E-04
+         3.71381E-01    1.29974E-04
+         3.81155E-01    1.35501E-04
+         3.90928E-01    1.41205E-04
+         4.00701E-01    1.47096E-04
+         4.10474E-01    1.53181E-04
+         4.20247E-01    1.59472E-04
+         4.30021E-01    1.65979E-04
+         4.39794E-01    1.72713E-04
+         4.49567E-01    1.79685E-04
+         4.59340E-01    1.86910E-04
+         4.62891E-01    1.89600E-04
+         4.69113E-01    1.94401E-04
+         4.78887E-01    2.02173E-04
+         4.88660E-01    2.10242E-04
+         4.98433E-01    2.18625E-04
+         5.08206E-01    2.27342E-04
+         5.17979E-01    2.36412E-04
+         5.27753E-01    2.45857E-04
+         5.37526E-01    2.55702E-04
+         5.47299E-01    2.65972E-04
+         5.57072E-01    2.76695E-04
+         5.63838E-01    2.84400E-04
+         5.66845E-01    2.87902E-04
+         5.76619E-01    2.99626E-04
+         5.86392E-01    3.11904E-04
+         5.96165E-01    3.24777E-04
+         6.05938E-01    3.38288E-04
+         6.15711E-01    3.52486E-04
+         6.25485E-01    3.67426E-04
+         6.32844E-01    3.79200E-04
+         6.35258E-01    3.83166E-04
+         6.45031E-01    3.99772E-04
+         6.54804E-01    4.17319E-04
+         6.64577E-01    4.35889E-04
+         6.74351E-01    4.55573E-04
+         6.82997E-01    4.74000E-04
+         6.84124E-01    4.76475E-04
+         6.93897E-01    4.98712E-04
+         7.03670E-01    5.22416E-04
+         7.13443E-01    5.47736E-04
+         7.21095E-01    5.68800E-04
+         7.23216E-01    5.74845E-04
+         7.32990E-01    6.03938E-04
+         7.42763E-01    6.35242E-04
+         7.51019E-01    6.63600E-04
+         7.52536E-01    6.69018E-04
+         7.62309E-01    7.05573E-04
+         7.72082E-01    7.45261E-04
+         7.75143E-01    7.58400E-04
+         7.81856E-01    7.88507E-04
+         7.91629E-01    8.35808E-04
+         7.95006E-01    8.53200E-04
+         8.01402E-01    8.87766E-04
+         8.11175E-01    9.45102E-04
+         8.11644E-01    9.48000E-04
+         8.20948E-01    1.00870E-03
+         8.25784E-01    1.04280E-03
+         8.30722E-01    1.07963E-03
+         8.37949E-01    1.13760E-03
+         8.40495E-01    1.15927E-03
+         8.48527E-01    1.23240E-03
+         8.50268E-01    1.24929E-03
+         8.57808E-01    1.32720E-03
+         8.60041E-01    1.35189E-03
+         8.66017E-01    1.42200E-03
+         8.69814E-01    1.46990E-03
+         8.73330E-01    1.51680E-03
+         8.79588E-01    1.60705E-03
+         8.79886E-01    1.61160E-03
+         8.85797E-01    1.70640E-03
+         8.89361E-01    1.76845E-03
+         8.91154E-01    1.80120E-03
+         8.96030E-01    1.89600E-03
+         8.99134E-01    1.96111E-03
+         9.00489E-01    1.99080E-03
+         9.04580E-01    2.08560E-03
+         9.08349E-01    2.18040E-03
+         9.08907E-01    2.19512E-03
+         9.11831E-01    2.27520E-03
+         9.15058E-01    2.37000E-03
+         9.18057E-01    2.46480E-03
+         9.18680E-01    2.48538E-03
+         9.20852E-01    2.55960E-03
+         9.23462E-01    2.65440E-03
+         9.25906E-01    2.74920E-03
+         9.28198E-01    2.84400E-03
+         9.28454E-01    2.85493E-03
+         9.30353E-01    2.93880E-03
+         9.32383E-01    3.03360E-03
+         9.34297E-01    3.12840E-03
+         9.36106E-01    3.22320E-03
+         9.37818E-01    3.31800E-03
+         9.38227E-01    3.34142E-03
+         9.39441E-01    3.41280E-03
+         9.40981E-01    3.50760E-03
+         9.42445E-01    3.60240E-03
+         9.43837E-01    3.69720E-03
+         9.45165E-01    3.79200E-03
+         9.46430E-01    3.88680E-03
+         9.47639E-01    3.98160E-03
+         9.48000E-01    4.01077E-03
+         9.48794E-01    4.07640E-03
+         9.49900E-01    4.17120E-03
+         9.50959E-01    4.26600E-03
+         9.51973E-01    4.36080E-03
+         9.52947E-01    4.45560E-03
+         9.53882E-01    4.55040E-03
+         9.54781E-01    4.64520E-03
+         9.55645E-01    4.74000E-03
+         9.56477E-01    4.83480E-03
+         9.57278E-01    4.92960E-03
+         9.57773E-01    4.98996E-03
+         9.58050E-01    5.02440E-03
+         9.58795E-01    5.11920E-03
+         9.59514E-01    5.21400E-03
+         9.60208E-01    5.30880E-03
+         9.60879E-01    5.40360E-03
+         9.61528E-01    5.49840E-03
+         9.62155E-01    5.59320E-03
+         9.62762E-01    5.68800E-03
+         9.63350E-01    5.78280E-03
+         9.63920E-01    5.87760E-03
+         9.64473E-01    5.97240E-03
+         9.65008E-01    6.06720E-03
+         9.65528E-01    6.16200E-03
+         9.66033E-01    6.25680E-03
+         9.66523E-01    6.35160E-03
+         9.66999E-01    6.44640E-03
+         9.67461E-01    6.54120E-03
+         9.67546E-01    6.55891E-03
+         9.67911E-01    6.63600E-03
+         9.68349E-01    6.73080E-03
+         9.68775E-01    6.82560E-03
+         9.69189E-01    6.92040E-03
+         9.69593E-01    7.01520E-03
+         9.69986E-01    7.11000E-03
+         9.70370E-01    7.20480E-03
+         9.70743E-01    7.29960E-03
+         9.71107E-01    7.39440E-03
+         9.71463E-01    7.48920E-03
+         9.71809E-01    7.58400E-03
+         9.72148E-01    7.67880E-03
+         9.72478E-01    7.77360E-03
+         9.72801E-01    7.86840E-03
+         9.73116E-01    7.96320E-03
+         9.73424E-01    8.05800E-03
+         9.73724E-01    8.15280E-03
+         9.74019E-01    8.24760E-03
+         9.74306E-01    8.34240E-03
+         9.74588E-01    8.43720E-03
+         9.74863E-01    8.53200E-03
+         9.75132E-01    8.62680E-03
+         9.75396E-01    8.72160E-03
+         9.75654E-01    8.81640E-03
+         9.75907E-01    8.91120E-03
+         9.76154E-01    9.00600E-03
+         9.76397E-01    9.10080E-03
+         9.76635E-01    9.19560E-03
+         9.76867E-01    9.29040E-03
+         9.77096E-01    9.38520E-03
+         9.77320E-01    9.48000E-03
+         9.77494E-01    9.50650E-03
+         9.77668E-01    9.53300E-03
+         9.77841E-01    9.55950E-03
+         9.78013E-01    9.58600E-03
+         9.78185E-01    9.61250E-03
+         9.78355E-01    9.63900E-03
+         9.78524E-01    9.66550E-03
+         9.78692E-01    9.69200E-03
+         9.78860E-01    9.71850E-03
+         9.79027E-01    9.74500E-03
+         9.79192E-01    9.77150E-03
+         9.79357E-01    9.79800E-03
+         9.79521E-01    9.82450E-03
+         9.79684E-01    9.85100E-03
+         9.79846E-01    9.87750E-03
+         9.80008E-01    9.90400E-03
+         9.80168E-01    9.93050E-03
+         9.80328E-01    9.95700E-03
+         9.80487E-01    9.98350E-03
+         9.80645E-01    1.00100E-02
+         9.80802E-01    1.00365E-02
+         9.80959E-01    1.00630E-02
+         9.81115E-01    1.00895E-02
+         9.81269E-01    1.01160E-02
+         9.81423E-01    1.01425E-02
+         9.81577E-01    1.01690E-02
+         9.81729E-01    1.01955E-02
+         9.81881E-01    1.02220E-02
+         9.82032E-01    1.02485E-02
+         9.82182E-01    1.02750E-02
+         9.82331E-01    1.03015E-02
+         9.82480E-01    1.03280E-02
+         9.82628E-01    1.03545E-02
+         9.82775E-01    1.03810E-02
+         9.82922E-01    1.04075E-02
+         9.83067E-01    1.04340E-02
+         9.83212E-01    1.04605E-02
+         9.83357E-01    1.04870E-02
+         9.83500E-01    1.05135E-02
+         9.83643E-01    1.05400E-02
+         9.83785E-01    1.05665E-02
+         9.83927E-01    1.05930E-02
+         9.84068E-01    1.06195E-02
+         9.84208E-01    1.06460E-02
+         9.84347E-01    1.06725E-02
+         9.84486E-01    1.06990E-02
+         9.84624E-01    1.07255E-02
+         9.84761E-01    1.07520E-02
+         9.84898E-01    1.07785E-02
+         9.85034E-01    1.08050E-02
+         9.85169E-01    1.08315E-02
+         9.85304E-01    1.08580E-02
+         9.85438E-01    1.08845E-02
+         9.85572E-01    1.09110E-02
+         9.85705E-01    1.09375E-02
+         9.85837E-01    1.09640E-02
+         9.85969E-01    1.09905E-02
+         9.86099E-01    1.10170E-02
+         9.86230E-01    1.10435E-02
+         9.86360E-01    1.10700E-02
+         9.86489E-01    1.10965E-02
+         9.86617E-01    1.11230E-02
+         9.86745E-01    1.11495E-02
+         9.86873E-01    1.11760E-02
+         9.86999E-01    1.12025E-02
+         9.87126E-01    1.12290E-02
+         9.87251E-01    1.12555E-02
+         9.87376E-01    1.12820E-02
+         9.87501E-01    1.13085E-02
+         9.87624E-01    1.13350E-02
+         9.87748E-01    1.13615E-02
+         9.87870E-01    1.13880E-02
+         9.87993E-01    1.14145E-02
+         9.88114E-01    1.14410E-02
+         9.88235E-01    1.14675E-02
+         9.88356E-01    1.14940E-02
+         9.88476E-01    1.15205E-02
+         9.88595E-01    1.15470E-02
+         9.88714E-01    1.15735E-02
+         9.88832E-01    1.16000E-02
+         9.88950E-01    1.16265E-02
+         9.89068E-01    1.16530E-02
+         9.89184E-01    1.16795E-02
+         9.89301E-01    1.17060E-02
+         9.89416E-01    1.17325E-02
+         9.89532E-01    1.17590E-02
+         9.89646E-01    1.17855E-02
+         9.89761E-01    1.18120E-02
+         9.89874E-01    1.18385E-02
+         9.89988E-01    1.18650E-02
+         9.90100E-01    1.18915E-02
+         9.90213E-01    1.19180E-02
+         9.90324E-01    1.19445E-02
+         9.90436E-01    1.19710E-02
+         9.90546E-01    1.19975E-02
+         9.90657E-01    1.20240E-02
+         9.90766E-01    1.20505E-02
+         9.90876E-01    1.20770E-02
+         9.90985E-01    1.21035E-02
+         9.91093E-01    1.21300E-02
+         9.91201E-01    1.21565E-02
+         9.91309E-01    1.21830E-02
+         9.91416E-01    1.22095E-02
+         9.91522E-01    1.22360E-02
+         9.91628E-01    1.22625E-02
+         9.91734E-01    1.22890E-02
+         9.91839E-01    1.23155E-02
+         9.91944E-01    1.23420E-02
+         9.92048E-01    1.23685E-02
+         9.92152E-01    1.23950E-02
+         9.92256E-01    1.24215E-02
+         9.92359E-01    1.24480E-02
+         9.92461E-01    1.24745E-02
+         9.92563E-01    1.25010E-02
+         9.92665E-01    1.25275E-02
+         9.92767E-01    1.25540E-02
+         9.92867E-01    1.25805E-02
+         9.92968E-01    1.26070E-02
+         9.93068E-01    1.26335E-02
+         9.93168E-01    1.26600E-02
+         9.93267E-01    1.26865E-02
+         9.93366E-01    1.27130E-02
+         9.93464E-01    1.27395E-02
+         9.93562E-01    1.27660E-02
+         9.93660E-01    1.27925E-02
+         9.93757E-01    1.28190E-02
+         9.93854E-01    1.28455E-02
+         9.93951E-01    1.28720E-02
+         9.94047E-01    1.28985E-02
+         9.94142E-01    1.29250E-02
+         9.94238E-01    1.29515E-02
+         9.94332E-01    1.29780E-02
+         9.94427E-01    1.30045E-02
+         9.94521E-01    1.30310E-02
+         9.94615E-01    1.30575E-02
+         9.94708E-01    1.30840E-02
+         9.94801E-01    1.31105E-02
+         9.94894E-01    1.31370E-02
+         9.94986E-01    1.31635E-02
+         9.95078E-01    1.31900E-02
+         9.95170E-01    1.32165E-02
+         9.95261E-01    1.32430E-02
+         9.95352E-01    1.32695E-02
+         9.95442E-01    1.32960E-02
+         9.95533E-01    1.33225E-02
+         9.95622E-01    1.33490E-02
+         9.95712E-01    1.33755E-02
+         9.95801E-01    1.34020E-02
+         9.95890E-01    1.34285E-02
+         9.95978E-01    1.34550E-02
+         9.96066E-01    1.34815E-02
+         9.96154E-01    1.35080E-02
+         9.96241E-01    1.35345E-02
+         9.96328E-01    1.35610E-02
+         9.96415E-01    1.35875E-02
+         9.96501E-01    1.36140E-02
+         9.96587E-01    1.36405E-02
+         9.96673E-01    1.36670E-02
+         9.96759E-01    1.36935E-02
+         9.96844E-01    1.37200E-02
+         9.96928E-01    1.37465E-02
+         9.97013E-01    1.37730E-02
+         9.97097E-01    1.37995E-02
+         9.97181E-01    1.38260E-02
+         9.97264E-01    1.38525E-02
+         9.97347E-01    1.38790E-02
+         9.97430E-01    1.39055E-02
+         9.97513E-01    1.39320E-02
+         9.97595E-01    1.39585E-02
+         9.97677E-01    1.39850E-02
+         9.97758E-01    1.40115E-02
+         9.97840E-01    1.40380E-02
+         9.97921E-01    1.40645E-02
+         9.98002E-01    1.40910E-02
+         9.98082E-01    1.41175E-02
+         9.98162E-01    1.41440E-02
+         9.98242E-01    1.41705E-02
+         9.98321E-01    1.41970E-02
+         9.98401E-01    1.42235E-02
+         9.98480E-01    1.42500E-02
+         9.98558E-01    1.42765E-02
+         9.98637E-01    1.43030E-02
+         9.98715E-01    1.43295E-02
+         9.98793E-01    1.43560E-02
+         9.98870E-01    1.43825E-02
+         9.98947E-01    1.44090E-02
+         9.99024E-01    1.44355E-02
+         9.99101E-01    1.44620E-02
+         9.99177E-01    1.44885E-02
+         9.99253E-01    1.45150E-02
+         9.99329E-01    1.45415E-02
+         9.99405E-01    1.45680E-02
+         9.99480E-01    1.45945E-02
+         9.99555E-01    1.46210E-02
+         9.99630E-01    1.46475E-02
+         9.99705E-01    1.46740E-02
+         9.99779E-01    1.47005E-02
+         9.99853E-01    1.47270E-02
+         9.99927E-01    1.47535E-02
+         1.00000E+00    1.47800E-02
+
+
+
+
+
+                                 E L E M E N T   S E T S
+
+
+  SET    MAP_C                                                                           
+  MEMBERS                    1
+
+  SET    MAP_S                                                                           
+  MEMBERS                    2
+
+  SET    SOLID                                                                           
+  MEMBERS                    2
+
+  SET    COHES                                                                           
+  MEMBERS                    1
+
+
+
+                                    N O D E   S E T S
+
+
+  SET    SOLID-NE                                                                        
+  MEMBERS                    6
+
+  SET    SOLID-NW                                                                        
+  MEMBERS                    5
+
+  SET    ALL                                                                             
+  MEMBERS                    1         2         3         4         5         6
+
+  SET    SOLID-SE                                                                        
+  MEMBERS                    4
+
+  SET    SOLID-SW                                                                        
+  MEMBERS                    3
+
+  SET    COHES-N                                                                         
+  MEMBERS                    3         4
+
+  SET    COHES-S                                                                         
+  MEMBERS                    1         2
+
+  SET    SOLID-N                                                                         
+  MEMBERS                    5         6
+
+  SET    COHES-W                                                                         
+  MEMBERS                    1         3
+
+  SET    SOLID-W                                                                         
+  MEMBERS                    3         5
+
+
+
+
+
+                                 N O D E   D E F I N I T I O N S
+
+       NODE           COORDINATES                       SINGLE POINT CONSTRAINTS 
+      NUMBER                                              TYPE    PLUS    DOF
+
+          1     0.0000       0.0000       0.0000                  1 2                                                  
+          2     1.0000       0.0000       0.0000                    2                                                  
+          3     0.0000       0.0000       0.0000                  1                                                    
+          4     1.0000       0.0000       0.0000                                                                       
+          5     0.0000       1.0000       0.0000                  1 2                                                  
+          6     1.0000       1.0000       0.0000                    2                                                  
+1
+
+   Abaqus 3DEXPERIENCE R2018x                                  Date 07-Nov-2023   Time 12:32:21
+   For use by AALTO UNIVERSITY under license from Dassault Systemes or its subsidiary.
+
+     no Hydrogen, TSL over nominal Area                                              
+
+
+                        S T E P       1     S T A T I C   A N A L Y S I S
+
+
+          displacement-controlled traction                                                
+
+     AUTOMATIC TIME CONTROL WITH -
+          A SUGGESTED INITIAL TIME INCREMENT OF                5.000E-03
+          AND A TOTAL TIME PERIOD OF                            1.00    
+          THE MINIMUM TIME INCREMENT ALLOWED IS                1.000E-06
+          THE MAXIMUM TIME INCREMENT ALLOWED IS                5.000E-03
+
+ CONVERGENCE TOLERANCE PARAMETERS FOR FORCE    
+     CRITERION FOR RESIDUAL FORCE     FOR A NONLINEAR PROBLEM          5.000E-03
+     CRITERION FOR DISP.    CORRECTION IN A NONLINEAR PROBLEM          1.000E-02
+     INITIAL VALUE OF TIME AVERAGE FORCE                               1.000E-02
+     AVERAGE FORCE     IS TIME AVERAGE FORCE    
+     ALTERNATE CRIT. FOR RESIDUAL FORCE     FOR A NONLINEAR PROBLEM    2.000E-02
+     CRITERION FOR ZERO FORCE     RELATIVE TO TIME AVRG. FORCE         1.000E-05
+     CRITERION FOR RESIDUAL FORCE     WHEN THERE IS ZERO FLUX          1.000E-05
+     CRITERION FOR DISP.    CORRECTION WHEN THERE IS ZERO FLUX         1.000E-03
+     CRITERION FOR RESIDUAL FORCE     FOR A LINEAR INCREMENT           1.000E-08
+     FIELD CONVERSION RATIO                                             1.00    
+     CRITERION FOR ZERO FORCE     REL. TO TIME AVRG. MAX. FORCE        1.000E-05
+     CRITERION FOR ZERO DISP.    RELATIVE TO CHARACTERISTIC LENGTH     1.000E-08
+
+     VOLUMETRIC STRAIN COMPATIBILITY TOLERANCE FOR HYBRID SOLIDS       1.000E-05
+     AXIAL STRAIN COMPATIBILITY TOLERANCE FOR HYBRID BEAMS             1.000E-05
+     TRANS. SHEAR STRAIN COMPATIBILITY TOLERANCE FOR HYBRID BEAMS      1.000E-05
+     SOFT CONTACT CONSTRAINT COMPATIBILITY TOLERANCE FOR P>P0          5.000E-03
+     SOFT CONTACT CONSTRAINT COMPATIBILITY TOLERANCE FOR P=0.0         0.100    
+     CONTACT FORCE ERROR TOLERANCE FOR CONVERT SDI=YES                 1.00    
+     DISPLACEMENT COMPATIBILITY TOLERANCE FOR DCOUP ELEMENTS           1.000E-05
+     ROTATION COMPATIBILITY TOLERANCE FOR DCOUP ELEMENTS               1.000E-05
+
+ EQUILIBRIUM WILL BE CHECKED FOR SEVERE DISCONTINUITY ITERATIONS
+
+ TIME INCREMENTATION CONTROL PARAMETERS:
+     FIRST EQUILIBRIUM ITERATION FOR CONSECUTIVE DIVERGENCE CHECK              4
+     EQUILIBRIUM ITERATION AT WHICH LOG. CONVERGENCE RATE CHECK BEGINS         8
+     EQUILIBRIUM ITERATION AFTER WHICH ALTERNATE RESIDUAL IS USED              9
+     MAXIMUM EQUILIBRIUM ITERATIONS ALLOWED                                   16
+     EQUILIBRIUM ITERATION COUNT FOR CUT-BACK IN NEXT INCREMENT               10
+     MAXIMUM EQUILIB. ITERS IN TWO INCREMENTS FOR TIME INCREMENT INCREASE      4
+     MAXIMUM ITERATIONS FOR SEVERE DISCONTINUITIES                            50
+     MAXIMUM ATTEMPTS ALLOWED IN AN INCREMENT                                  5
+     MAXIMUM DISCON. ITERS IN TWO INCREMENTS FOR TIME INCREMENT INCREASE      50
+     MAXIMUM CONTACT AUGMENTATIONS FOR *SURFACE BEHAVIOR,AUGMENTED LAGRANGE   50
+     CUT-BACK FACTOR AFTER DIVERGENCE                                 0.2500    
+     CUT-BACK FACTOR FOR TOO SLOW CONVERGENCE                         0.5000    
+     CUT-BACK FACTOR AFTER TOO MANY EQUILIBRIUM ITERATIONS            0.7500    
+     CUT-BACK FACTOR AFTER TOO MANY SEVERE DISCONTINUITY ITERATIONS   0.2500    
+     CUT-BACK FACTOR AFTER PROBLEMS IN ELEMENT ASSEMBLY               0.2500    
+     INCREASE FACTOR AFTER TWO INCREMENTS THAT CONVERGE QUICKLY        1.500    
+     MAX. TIME INCREMENT INCREASE FACTOR ALLOWED                       1.500    
+     MAX. TIME INCREMENT INCREASE FACTOR ALLOWED (DYNAMICS)            1.250    
+     MAX. TIME INCREMENT INCREASE FACTOR ALLOWED (DIFFUSION)           2.000    
+     MINIMUM TIME INCREMENT RATIO FOR EXTRAPOLATION TO OCCUR          0.1000    
+     MAX. RATIO OF TIME INCREMENT TO STABILITY LIMIT                   1.000    
+     FRACTION OF STABILITY LIMIT FOR NEW TIME INCREMENT               0.9500    
+     TIME INCREMENT INCREASE FACTOR BEFORE A TIME POINT                1.000    
+     GLOBAL STABILIZATION CONTROL IS NOT USED
+
+     THE MAXIMUM NUMBER OF INCREMENTS IN THIS STEP IS                    1000
+
+     LINEAR EXTRAPOLATION WILL BE USED
+
+     CHARACTERISTIC ELEMENT LENGTH      1.00    
+
+     DETAILS REGARDING ACTUAL SOLUTION WAVEFRONT REQUESTED
+
+     DETAILED OUTPUT OF DIAGNOSTICS TO DATABASE REQUESTED
+
+     PRINT OF INCREMENT NUMBER, TIME, ETC., TO THE MESSAGE FILE EVERY     1  INCREMENTS
+
+
+
+                              D A T A B A S E   O U T P U T   G R O U P       1
+
+
+  THE FOLLOWING  FIELD   OUTPUT WILL BE WRITTEN EVERY        1 INCREMENT(S)
+
+
+
+   THE FOLLOWING OUTPUT WILL BE WRITTEN FOR ALL ELEMENTS OF TYPE COH2D4.  OUTPUT IS AT THE 
+   INTEGRATION POINTS.
+
+          S           E           
+
+
+
+   THE FOLLOWING OUTPUT WILL BE WRITTEN FOR ALL ELEMENTS OF TYPE CPE4R.  OUTPUT IS AT THE 
+   INTEGRATION POINTS.
+
+          S           E           PE          PEEQ        PEMAG       
+
+
+
+   THE FOLLOWING OUTPUT WILL BE WRITTEN FOR ALL NODES
+
+
+            U         RF      
+
+
+
+  END OF DATABASE OUTPUT GROUP    1
+
+
+
+
+                              D A T A B A S E   O U T P U T   G R O U P       2
+
+
+  THE FOLLOWING HISTORY  OUTPUT WILL BE WRITTEN EVERY        1 INCREMENT(S)
+
+
+
+   THE FOLLOWING OUTPUT WILL BE WRITTEN FOR ALL ELEMENTS OF TYPE COH2D4 IN ELEMENT SET COHES. 
+   OUTPUT IS AT THE INTEGRATION POINTS.
+
+          MAXECRT     E22         E12         S22         S12         SDEG        
+
+
+
+   THE FOLLOWING OUTPUT WILL BE WRITTEN FOR ALL ELEMENTS OF TYPE COH2D4 IN ELEMENT SET COHES
+
+          STATUS      
+
+
+
+   THE FOLLOWING OUTPUT WILL BE WRITTEN FOR ALL ELEMENTS OF TYPE CPE4R IN ELEMENT SET SOLID. OUTPUT 
+   IS AT THE INTEGRATION POINTS.
+
+          E11         E22         E33         E12         PE11        PE22        PE33        PE12        S11         
+
+          S22         S33         S12         
+
+
+
+   THE FOLLOWING ENERGY OUTPUT QUANTITIES WILL BE WRITTEN FOR THE WHOLE MODEL
+
+          ALLKE       ALLSE       ALLWK       ALLPD       ALLCD       ALLVD       ALLKL       ALLAE       ALLQB       
+
+          ALLEE       ALLIE       ETOTAL      ALLFD       ALLJD       ALLSD       ALLDMD      
+
+          ALLCCDW     ALLCCE      ALLCCEN     ALLCCET     ALLCCSD     ALLCCSDN    ALLCCSDT    ALLDTI      
+
+
+
+   THE FOLLOWING OUTPUT WILL BE WRITTEN FOR NODES IN NODE SET ALL
+
+
+            U1        U2      
+
+
+
+  END OF DATABASE OUTPUT GROUP    2
+
+
+
+
+
+                              B O U N D A R Y   C O N D I T I O N S
+
+
+      NODE      DOF     AMP.    MAGNITUDE                 NODE      DOF     AMP.    MAGNITUDE
+                        REF.                                                REF.
+
+           1    1     (RAMP)     0.0000                        1    2     (RAMP)     0.0000               
+           2    2     (RAMP)     0.0000                        3    1     (RAMP)     0.0000               
+           5    1     (RAMP)     0.0000                        5    2     (RAMP)    3.00000E-02           
+           6    2     (RAMP)    3.00000E-02           
+
+     - (RAMP) OR (STEP) - INDICATE USE OF DEFAULT AMPLITUDES ASSOCIATED WITH THE STEP
+
+
+
+
+                      C O N S T R A I N T    C H E C K S
+
+            PERFORM CONSTRAINT CHECKS:                        YES
+            AUTOMATIC MODEL CHANGES:                          YES
+            CONSTRAINT CHECKS FREQUENCY:                             1
+            TERMINATE ANALYSIS IF OVERCONSTRAINTS ARE FOUND:  NO             
+
+
+
+                            P R O B L E M   S I Z E
+
+
+          NUMBER OF ELEMENTS IS                                     2
+          NUMBER OF NODES IS                                        6
+          NUMBER OF NODES DEFINED BY THE USER                       6
+          TOTAL NUMBER OF VARIABLES IN THE MODEL                   12
+          (DEGREES OF FREEDOM PLUS MAX NO. OF ANY LAGRANGE MULTIPLIER
+           VARIABLES. INCLUDE *PRINT,SOLVE=YES TO GET THE ACTUAL NUMBER.)
+
+
+
+                              END OF USER INPUT PROCESSING
+
+
+
+     JOB TIME SUMMARY
+       USER TIME (SEC)      =   0.0000    
+       SYSTEM TIME (SEC)    =   0.0000    
+       TOTAL CPU TIME (SEC) =   0.0000    
+       WALLCLOCK TIME (SEC) =          0
+1
+
+   Abaqus 3DEXPERIENCE R2018x                                  Date 07-Nov-2023   Time 12:32:25
+   For use by AALTO UNIVERSITY under license from Dassault Systemes or its subsidiary.
+
+     no Hydrogen, TSL over nominal Area                                                        STEP    1  INCREMENT    1
+     displacement-controlled traction                                                     TIME COMPLETED IN THIS STEP   0.00    
+
+
+                        S T E P       1     S T A T I C   A N A L Y S I S
+
+
+          displacement-controlled traction                                                
+
+     AUTOMATIC TIME CONTROL WITH -
+          A SUGGESTED INITIAL TIME INCREMENT OF                5.000E-03
+          AND A TOTAL TIME PERIOD OF                            1.00    
+          THE MINIMUM TIME INCREMENT ALLOWED IS                1.000E-06
+          THE MAXIMUM TIME INCREMENT ALLOWED IS                5.000E-03
+
+     LINEAR EQUATION SOLVER TYPE         DIRECT SPARSE
+  
+                   M E M O R Y   E S T I M A T E
+  
+ PROCESS      FLOATING PT       MINIMUM MEMORY        MEMORY TO
+              OPERATIONS           REQUIRED          MINIMIZE I/O
+             PER ITERATION           (MB)               (MB)
+  
+     1          3.78E+02               17                 24
+  
+ NOTE:
+      (1) SINCE ABAQUS DOES NOT PRE-ALLOCATE MEMORY AND ONLY ALLOCATES MEMORY AS NEEDED DURING THE ANALYSIS,
+          THE MEMORY REQUIREMENT PRINTED HERE CAN ONLY BE VIEWED AS A GENERAL GUIDELINE BASED ON THE BEST
+          KNOWLEDGE AVAILABLE AT THE BEGINNING OF A STEP BEFORE THE SOLUTION PROCESS HAS BEGUN.
+      (2) THE ESTIMATE IS NORMALLY UPDATED AT THE BEGINNING OF EVERY STEP. IT IS THE MAXIMUM VALUE OF THE
+          ESTIMATE FROM THE CURRENT STEP TO THE LAST STEP OF THE ANALYSIS, WITH UNSYMMETRIC SOLUTION TAKEN
+          INTO ACCOUNT IF APPLICABLE. 
+      (3) SINCE THE ESTIMATE IS BASED ON THE ACTIVE DEGREES OF FREEDOM IN THE FIRST ITERATION OF THE 
+          CURRENT STEP, THE MEMORY ESTIMATE MIGHT BE SIGNIFICANTLY DIFFERENT THAN ACTUAL USAGE FOR 
+          PROBLEMS WITH SUBSTANTIAL CHANGES IN ACTIVE DEGREES OF FREEDOM BETWEEN STEPS (OR EVEN WITHIN
+          THE SAME STEP). EXAMPLES ARE: PROBLEMS WITH SIGNIFICANT CONTACT CHANGES, PROBLEMS WITH MODEL
+          CHANGE, PROBLEMS WITH BOTH STATIC STEP AND STEADY STATE DYNAMIC PROCEDURES WHERE ACOUSTIC 
+          ELEMENTS WILL ONLY BE ACTIVATED IN THE STEADY STATE DYNAMIC STEPS.
+      (4) FOR MULTI-PROCESS EXECUTION, THE ESTIMATED VALUE OF FLOATING POINT OPERATIONS FOR EACH PROCESS
+          IS BASED ON AN INITIAL SCHEDULING OF OPERATIONS AND MIGHT NOT REFLECT THE ACTUAL FLOATING 
+          POINT OPERATIONS COMPLETED ON EACH PROCESS. OPERATIONS ARE DYNAMICALLY BALANCED DURING EXECUTION, 
+          SO THE ACTUAL BALANCE OF OPERATIONS BETWEEN PROCESSES IS EXPECTED TO BE BETTER THAN THE ESTIMATE
+          PRINTED HERE.
+      (5) THE UPPER LIMIT OF MEMORY THAT CAN BE ALLOCATED BY ABAQUS WILL IN GENERAL DEPEND ON THE VALUE OF
+          THE "MEMORY" PARAMETER AND THE AMOUNT OF PHYSICAL MEMORY AVAILABLE ON THE MACHINE. PLEASE SEE
+          THE "ABAQUS ANALYSIS USER'S MANUAL" FOR MORE DETAILS. THE ACTUAL USAGE OF MEMORY AND OF DISK
+          SPACE FOR SCRATCH DATA WILL DEPEND ON THIS UPPER LIMIT AS WELL AS THE MEMORY REQUIRED TO MINIMIZE
+          I/O. IF THE MEMORY UPPER LIMIT IS GREATER THAN THE MEMORY REQUIRED TO MINIMIZE I/O, THEN THE ACTUAL
+          MEMORY USAGE WILL BE CLOSE TO THE ESTIMATED "MEMORY TO MINIMIZE I/O" VALUE, AND THE SCRATCH DISK
+          USAGE WILL BE CLOSE-TO-ZERO; OTHERWISE, THE ACTUAL MEMORY USED WILL BE CLOSE TO THE PREVIOUSLY
+          MENTIONED MEMORY LIMIT, AND THE SCRATCH DISK USAGE WILL BE ROUGHLY PROPORTIONAL TO THE DIFFERENCE
+          BETWEEN THE ESTIMATED "MEMORY TO MINIMIZE I/O" AND THE MEMORY UPPER LIMIT. HOWEVER ACCURATE
+          ESTIMATE OF THE SCRATCH DISK SPACE IS NOT POSSIBLE.
+      (6) USING "*RESTART, WRITE" CAN GENERATE A LARGE AMOUNT OF DATA WRITTEN IN THE WORK DIRECTORY.
+
+
+          THE ANALYSIS HAS BEEN COMPLETED
+
+
+
+                              ANALYSIS COMPLETE
+                              WITH      1 WARNING MESSAGES ON THE DAT FILE
+                              AND      32 WARNING MESSAGES ON THE MSG FILE
+                                       32 WARNINGS ARE FOR NEGATIVE EIGENVALUES
+
+
+
+     JOB TIME SUMMARY
+       USER TIME (SEC)      =   1.7000    
+       SYSTEM TIME (SEC)    =  0.90000    
+       TOTAL CPU TIME (SEC) =   2.6000    
+       WALLCLOCK TIME (SEC) =          5

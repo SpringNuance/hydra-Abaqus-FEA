@@ -1,0 +1,389 @@
+1
+
+   Abaqus 3DEXPERIENCE R2018x                                  Date 07-Nov-2023   Time 12:48:09
+   For use by AALTO UNIVERSITY under license from Dassault Systemes or its subsidiary.
+
+
+
+                         The Abaqus Software is a product of:
+
+                           Dassault Systemes SIMULIA Corp.
+                           1301 Atwood Avenue, Suite 101W
+                              Johnston, RI 02919, USA
+ 
+
+
+                   The Abaqus Software is available only under license
+                   from Dassault Systemes or its subsidiary and may be
+                   used or reproduced only in accordance with the terms
+                   of such license.
+ 
+                          On machine D23-0234 
+                          you are authorized to run
+                          Abaqus/Standard until 20-Feb-2024
+
+                          Your site id is: 200000000014764 
+
+
+ 
+                    For assistance or any other information you may
+                    obtain contact information for your local office
+                    from the world wide web at:
+
+                      http://www.3ds.com/products/simulia/locations/
+
+ 
+                * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+                *                                                         * 
+                *                   *****************                     * 
+                *                   *  N O T I C E  *                     * 
+                *                   *****************                     * 
+                *                                                         * 
+                *                                                         * 
+                *               Abaqus 3DEXPERIENCE R2018x                * 
+                *                                                         * 
+                *          BUILD ID: 2017_11_07-19.21.41 127140           * 
+                *                                                         * 
+                *                                                         * 
+                *  Please make sure you are using                         * 
+                *  release 3DEXPERIENCE R2018x manuals                    * 
+                *  plus the notes accompanying this release.              * 
+                *                                                         * 
+                *                                                         * 
+                *                                                         * 
+                *                                                         * 
+                *                                                         * 
+                *   This program may not be used for commercial purposes  * 
+                *           without payment of a commercial fee.          * 
+                *                                                         * 
+                * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+
+
+ 
+
+
+
+     PROCESSING PART, INSTANCE, AND ASSEMBLY INFORMATION
+   *******************************************************
+
+
+     END PROCESSING PART, INSTANCE, AND ASSEMBLY INFORMATION
+   ***********************************************************
+
+  *INITIAL CONDITIONS, TYPE=FIELD, VARIABLE=1
+  *INITIAL CONDITIONS, TYPE=FIELD, VARIABLE=2, FILE=H-2massdiff, OUTPUT VARIABLE=NNC, INTERPOLATE
+
+
+
+     OPTIONS BEING PROCESSED
+   ***************************
+
+
+  *HEADING
+          Two-dimensional element                                                                                                                                                                                                                                         
+  *INCLUDE, INPUT=_geometry.inp
+
+  *** INPUT DATA IS READ FROM FILE _geometry.inp                                                                                                                                                                                                                                                  
+
+  *NODE, NSET=COHES
+  *NODE, NSET=HYDRA
+  *NSET, NSET=YDISPL
+  *NSET, NSET=YDISPL1
+  *NSET, NSET=XDISPL
+  *NSET, NSET=LOAD
+  *Nset, nset=CONC
+  *NSET, NSET=NHIST
+  *INCLUDE, INPUT=_solid.inp
+
+  *** INPUT DATA IS READ FROM FILE _solid.inp                                                                                                                                                                                                                                                     
+
+  *ELEMENT, TYPE=CPE4R, ELSET=HYDRA
+  *ELSET, ELSET=MAP_S, UNSORTED
+  *ELSET, ELSET=HYDRA-HIST
+  *INCLUDE, INPUT=_cohes.inp
+
+  *** INPUT DATA IS READ FROM FILE _cohes.inp                                                                                                                                                                                                                                                     
+
+  *ELEMENT, TYPE=COH2D4, ELSET=COHES
+  *ELSET, ELSET=MAP_C, UNSORTED
+  *INCLUDE, INPUT=_equation.inp
+
+  *** INPUT DATA IS READ FROM FILE _equation.inp                                                                                                                                                                                                                                                  
+
+  *NSET, NSET=REAL, UNSORTED
+  *NSET, NSET=IMAG, UNSORTED
+  *NSET, NSET=LEFT, UNSORTED
+  *NSET, NSET=RIGHT, UNSORTED
+  *INCLUDE, INPUT=_AISI.inp
+
+  *** INPUT DATA IS READ FROM FILE _AISI.inp                                                                                                                                                                                                                                                      
+
+  *INCLUDE, INPUT=_coh-H.inp
+
+  *** INPUT DATA IS READ FROM FILE _coh-H.inp                                                                                                                                                                                                                                                     
+
+  *MATERIAL, NAME=AISI
+  *ELASTIC
+  *PLASTIC
+  *USER OUTPUT VARIABLES
+  *MATERIAL, NAME=COH
+  *USER DEFINED FIELD
+  *DEPVAR
+  *ELASTIC, TYPE=TRACTION, DEPENDENCIES=1
+  *DAMAGE INITIATION, CRITERION=MAXE
+  *DAMAGE EVOLUTION, TYPE=DISPLACEMENT, SOFTENING=TABULAR
+  *INITIAL CONDITIONS, TYPE=FIELD, VARIABLE=1
+  *INITIAL CONDITIONS, TYPE=FIELD, VARIABLE=2, FILE=H-2massdiff, OUTPUT VARIABLE=NNC, INTERPOLATE
+  *SOLID SECTION, ELSET=HYDRA, MATERIAL=AISI
+  *SOLID SECTION, ELSET=HYDRA, MATERIAL=AISI
+
+ ***WARNING: FOR TWO-DIMENSIONAL MODELS, IF A NON-UNITY THICKNESS IS SPECIFIED 
+             FOR TWO-DIMENSIONAL SOLID ELEMENTS AND THESE ELEMENTS ARE INVOLVED 
+             IN AN INTERACTION SUCH AS CONTACT, THE SAME THICKNESS SHOULD BE 
+             SPECIFIED FOR THE OUT-OF-PLANE THICKNESS OF THE CORRESPONDING 
+             SURFACE UNDER *SURFACE INTERACTION.
+  *COHESIVE SECTION, ELSET=COHES, RESPONSE=TRACTION SEPARATION, MATERIAL=COH
+  *COHESIVE SECTION, ELSET=COHES, RESPONSE=TRACTION SEPARATION, MATERIAL=COH
+  *INITIAL CONDITIONS, TYPE=FIELD, VARIABLE=1
+  *INITIAL CONDITIONS, TYPE=FIELD, VARIABLE=2, FILE=H-2massdiff, OUTPUT VARIABLE=NNC, INTERPOLATE
+  *BOUNDARY
+  *BOUNDARY
+  *BOUNDARY
+  *BOUNDARY
+  *COHESIVE SECTION, ELSET=COHES, RESPONSE=TRACTION SEPARATION, MATERIAL=COH
+  *EQUATION
+  *EQUATION
+  *OUTPUT, FIELD, VARIABLE=PRESELECT
+  *OUTPUT, HISTORY, VARIABLE=PRESELECT
+  *OUTPUT, FIELD
+  *OUTPUT, HISTORY
+  *ELEMENT OUTPUT
+  *ELEMENT OUTPUT, ELSET=COHES
+  *ELEMENT OUTPUT, ELSET=COHES
+  *ELEMENT OUTPUT, ELSET=HYDRA-HIST
+  *INITIAL CONDITIONS, TYPE=FIELD, VARIABLE=1
+  *INITIAL CONDITIONS, TYPE=FIELD, VARIABLE=2, FILE=H-2massdiff, OUTPUT VARIABLE=NNC, INTERPOLATE
+  *OUTPUT, FIELD, VARIABLE=PRESELECT
+  *OUTPUT, HISTORY, VARIABLE=PRESELECT
+  *OUTPUT, FIELD
+  *OUTPUT, HISTORY
+  *ELEMENT OUTPUT
+  *ELEMENT OUTPUT, ELSET=COHES
+  *ELEMENT OUTPUT, ELSET=COHES
+  *ELEMENT OUTPUT, ELSET=HYDRA-HIST
+  *INITIAL CONDITIONS, TYPE=FIELD, VARIABLE=1
+  *INITIAL CONDITIONS, TYPE=FIELD, VARIABLE=2, FILE=H-2massdiff, OUTPUT VARIABLE=NNC, INTERPOLATE
+
+ ***NOTE: Initial Normalized concentration will be taken from step -1, 
+          increment 60 of the output database file H-2massdiff.odb
+  *OUTPUT, FIELD, VARIABLE=PRESELECT
+  *OUTPUT, HISTORY, VARIABLE=PRESELECT
+  *OUTPUT, FIELD
+  *OUTPUT, HISTORY
+  *ELEMENT OUTPUT
+  *ELEMENT OUTPUT, ELSET=COHES
+  *ELEMENT OUTPUT, ELSET=COHES
+  *ELEMENT OUTPUT, ELSET=HYDRA-HIST
+  *STEP, NAME=Step-1, INC=300
+  *OUTPUT, FIELD, VARIABLE=PRESELECT
+  *OUTPUT, HISTORY, VARIABLE=PRESELECT
+  *OUTPUT, FIELD
+  *OUTPUT, HISTORY
+  *STEP, NAME=Step-1, INC=300
+  *STEP, NAME=Step-1, INC=300
+  *STATIC, STABILIZE
+
+ ***WARNING: THE ADAPTIVE AUTOMATIC STABILIZATION SCHEME WITH ALLSDTOL=0.05 
+             WILL NOW BE USED BY DEFAULT IN THIS STEP. SET THE PARAMETER 
+             ALLSDTOL TO ZERO IF YOU WANT TO USE THE AUTOMATIC STABILIZATION 
+             SCHEME WITH A CONSTANT DAMPING FACTOR
+  *BOUNDARY
+  *BOUNDARY
+  *OUTPUT, FIELD, VARIABLE=PRESELECT
+  *OUTPUT, HISTORY, VARIABLE=PRESELECT
+  *OUTPUT, FIELD
+  *ELEMENT OUTPUT
+  *ELEMENT OUTPUT, ELSET=COHES
+  *OUTPUT, HISTORY
+  *ELEMENT OUTPUT, ELSET=COHES
+  *ELEMENT OUTPUT, ELSET=HYDRA-HIST
+  *NODE OUTPUT, NSET=NHIST
+  *END STEP
+  *STEP, NAME=Step-1, INC=300
+  *STATIC, STABILIZE
+  *BOUNDARY
+  *BOUNDARY
+  *END STEP
+
+ ***WARNING: DEGREE OF FREEDOM 2 IS NOT ACTIVE ON NODE 1 - THIS BOUNDARY 
+             CONDITION IS IGNORED
+
+ ***WARNING: Boundary conditions are specified on inactive dof of 1 nodes. The 
+             nodes have been identified in node set WarnNodeBCInactiveDof.
+
+
+
+                            P R O B L E M   S I Z E
+
+
+          NUMBER OF ELEMENTS IS                                    11
+          NUMBER OF NODES IS                                       24
+          NUMBER OF NODES DEFINED BY THE USER                      24
+          TOTAL NUMBER OF VARIABLES IN THE MODEL                   48
+          (DEGREES OF FREEDOM PLUS MAX NO. OF ANY LAGRANGE MULTIPLIER
+           VARIABLES. INCLUDE *PRINT,SOLVE=YES TO GET THE ACTUAL NUMBER.)
+
+
+
+                              END OF USER INPUT PROCESSING
+
+
+
+     JOB TIME SUMMARY
+       USER TIME (SEC)      =  0.10000    
+       SYSTEM TIME (SEC)    =   0.0000    
+       TOTAL CPU TIME (SEC) =  0.10000    
+       WALLCLOCK TIME (SEC) =          0
+1
+
+   Abaqus 3DEXPERIENCE R2018x                                  Date 07-Nov-2023   Time 12:48:14
+   For use by AALTO UNIVERSITY under license from Dassault Systemes or its subsidiary.
+
+     Two-dimensional element                                                                   STEP    1  INCREMENT    1
+                                                                                          TIME COMPLETED IN THIS STEP   0.00    
+
+
+                        A N A L Y S I S    D A T A C H E C K
+
+
+  
+                   M E M O R Y   E S T I M A T E
+  
+ PROCESS      FLOATING PT       MINIMUM MEMORY        MEMORY TO
+              OPERATIONS           REQUIRED          MINIMIZE I/O
+             PER ITERATION           (MB)               (MB)
+  
+     1          5.58E+03                7                  7
+  
+ NOTE:
+      (1) SINCE ABAQUS DOES NOT PRE-ALLOCATE MEMORY AND ONLY ALLOCATES MEMORY AS NEEDED DURING THE ANALYSIS,
+          THE MEMORY REQUIREMENT PRINTED HERE CAN ONLY BE VIEWED AS A GENERAL GUIDELINE BASED ON THE BEST
+          KNOWLEDGE AVAILABLE AT THE BEGINNING OF A STEP BEFORE THE SOLUTION PROCESS HAS BEGUN.
+      (2) THE ESTIMATE IS NORMALLY UPDATED AT THE BEGINNING OF EVERY STEP. IT IS THE MAXIMUM VALUE OF THE
+          ESTIMATE FROM THE CURRENT STEP TO THE LAST STEP OF THE ANALYSIS, WITH UNSYMMETRIC SOLUTION TAKEN
+          INTO ACCOUNT IF APPLICABLE. 
+      (3) SINCE THE ESTIMATE IS BASED ON THE ACTIVE DEGREES OF FREEDOM IN THE FIRST ITERATION OF THE 
+          CURRENT STEP, THE MEMORY ESTIMATE MIGHT BE SIGNIFICANTLY DIFFERENT THAN ACTUAL USAGE FOR 
+          PROBLEMS WITH SUBSTANTIAL CHANGES IN ACTIVE DEGREES OF FREEDOM BETWEEN STEPS (OR EVEN WITHIN
+          THE SAME STEP). EXAMPLES ARE: PROBLEMS WITH SIGNIFICANT CONTACT CHANGES, PROBLEMS WITH MODEL
+          CHANGE, PROBLEMS WITH BOTH STATIC STEP AND STEADY STATE DYNAMIC PROCEDURES WHERE ACOUSTIC 
+          ELEMENTS WILL ONLY BE ACTIVATED IN THE STEADY STATE DYNAMIC STEPS.
+      (4) FOR MULTI-PROCESS EXECUTION, THE ESTIMATED VALUE OF FLOATING POINT OPERATIONS FOR EACH PROCESS
+          IS BASED ON AN INITIAL SCHEDULING OF OPERATIONS AND MIGHT NOT REFLECT THE ACTUAL FLOATING 
+          POINT OPERATIONS COMPLETED ON EACH PROCESS. OPERATIONS ARE DYNAMICALLY BALANCED DURING EXECUTION, 
+          SO THE ACTUAL BALANCE OF OPERATIONS BETWEEN PROCESSES IS EXPECTED TO BE BETTER THAN THE ESTIMATE
+          PRINTED HERE.
+      (5) THE UPPER LIMIT OF MEMORY THAT CAN BE ALLOCATED BY ABAQUS WILL IN GENERAL DEPEND ON THE VALUE OF
+          THE "MEMORY" PARAMETER AND THE AMOUNT OF PHYSICAL MEMORY AVAILABLE ON THE MACHINE. PLEASE SEE
+          THE "ABAQUS ANALYSIS USER'S MANUAL" FOR MORE DETAILS. THE ACTUAL USAGE OF MEMORY AND OF DISK
+          SPACE FOR SCRATCH DATA WILL DEPEND ON THIS UPPER LIMIT AS WELL AS THE MEMORY REQUIRED TO MINIMIZE
+          I/O. IF THE MEMORY UPPER LIMIT IS GREATER THAN THE MEMORY REQUIRED TO MINIMIZE I/O, THEN THE ACTUAL
+          MEMORY USAGE WILL BE CLOSE TO THE ESTIMATED "MEMORY TO MINIMIZE I/O" VALUE, AND THE SCRATCH DISK
+          USAGE WILL BE CLOSE-TO-ZERO; OTHERWISE, THE ACTUAL MEMORY USED WILL BE CLOSE TO THE PREVIOUSLY
+          MENTIONED MEMORY LIMIT, AND THE SCRATCH DISK USAGE WILL BE ROUGHLY PROPORTIONAL TO THE DIFFERENCE
+          BETWEEN THE ESTIMATED "MEMORY TO MINIMIZE I/O" AND THE MEMORY UPPER LIMIT. HOWEVER ACCURATE
+          ESTIMATE OF THE SCRATCH DISK SPACE IS NOT POSSIBLE.
+      (6) USING "*RESTART, WRITE" CAN GENERATE A LARGE AMOUNT OF DATA WRITTEN IN THE WORK DIRECTORY.
+
+
+
+                              ANALYSIS DATACHECK COMPLETE
+                              WITH      4 WARNING MESSAGES ON THE DAT FILE
+
+
+
+     JOB TIME SUMMARY
+       USER TIME (SEC)      =   0.0000    
+       SYSTEM TIME (SEC)    =   0.0000    
+       TOTAL CPU TIME (SEC) =   0.0000    
+       WALLCLOCK TIME (SEC) =          0
+1
+
+   Abaqus 3DEXPERIENCE R2018x                                  Date 07-Nov-2023   Time 12:49:58
+   For use by AALTO UNIVERSITY under license from Dassault Systemes or its subsidiary.
+
+     Two-dimensional element                                                                   STEP    1  INCREMENT    1
+                                                                                          TIME COMPLETED IN THIS STEP   0.00    
+
+
+                        S T E P       1     S T A T I C   A N A L Y S I S
+
+
+                                                                                          
+
+     AUTOMATIC TIME CONTROL WITH -
+          A SUGGESTED INITIAL TIME INCREMENT OF                5.000E-03
+          AND A TOTAL TIME PERIOD OF                            1.00    
+          THE MINIMUM TIME INCREMENT ALLOWED IS                1.000E-10
+          THE MAXIMUM TIME INCREMENT ALLOWED IS                1.000E-02
+
+     LINEAR EQUATION SOLVER TYPE         DIRECT SPARSE
+
+     ADAPTIVE AUTOMATIC STABILIZATION WITH 
+     INITIAL DISSIPATED ENERGY FRACTION  =   2.000E-04
+  
+                   M E M O R Y   E S T I M A T E
+  
+ PROCESS      FLOATING PT       MINIMUM MEMORY        MEMORY TO
+              OPERATIONS           REQUIRED          MINIMIZE I/O
+             PER ITERATION           (MB)               (MB)
+  
+     1          4.20E+03               17                 24
+  
+ NOTE:
+      (1) SINCE ABAQUS DOES NOT PRE-ALLOCATE MEMORY AND ONLY ALLOCATES MEMORY AS NEEDED DURING THE ANALYSIS,
+          THE MEMORY REQUIREMENT PRINTED HERE CAN ONLY BE VIEWED AS A GENERAL GUIDELINE BASED ON THE BEST
+          KNOWLEDGE AVAILABLE AT THE BEGINNING OF A STEP BEFORE THE SOLUTION PROCESS HAS BEGUN.
+      (2) THE ESTIMATE IS NORMALLY UPDATED AT THE BEGINNING OF EVERY STEP. IT IS THE MAXIMUM VALUE OF THE
+          ESTIMATE FROM THE CURRENT STEP TO THE LAST STEP OF THE ANALYSIS, WITH UNSYMMETRIC SOLUTION TAKEN
+          INTO ACCOUNT IF APPLICABLE. 
+      (3) SINCE THE ESTIMATE IS BASED ON THE ACTIVE DEGREES OF FREEDOM IN THE FIRST ITERATION OF THE 
+          CURRENT STEP, THE MEMORY ESTIMATE MIGHT BE SIGNIFICANTLY DIFFERENT THAN ACTUAL USAGE FOR 
+          PROBLEMS WITH SUBSTANTIAL CHANGES IN ACTIVE DEGREES OF FREEDOM BETWEEN STEPS (OR EVEN WITHIN
+          THE SAME STEP). EXAMPLES ARE: PROBLEMS WITH SIGNIFICANT CONTACT CHANGES, PROBLEMS WITH MODEL
+          CHANGE, PROBLEMS WITH BOTH STATIC STEP AND STEADY STATE DYNAMIC PROCEDURES WHERE ACOUSTIC 
+          ELEMENTS WILL ONLY BE ACTIVATED IN THE STEADY STATE DYNAMIC STEPS.
+      (4) FOR MULTI-PROCESS EXECUTION, THE ESTIMATED VALUE OF FLOATING POINT OPERATIONS FOR EACH PROCESS
+          IS BASED ON AN INITIAL SCHEDULING OF OPERATIONS AND MIGHT NOT REFLECT THE ACTUAL FLOATING 
+          POINT OPERATIONS COMPLETED ON EACH PROCESS. OPERATIONS ARE DYNAMICALLY BALANCED DURING EXECUTION, 
+          SO THE ACTUAL BALANCE OF OPERATIONS BETWEEN PROCESSES IS EXPECTED TO BE BETTER THAN THE ESTIMATE
+          PRINTED HERE.
+      (5) THE UPPER LIMIT OF MEMORY THAT CAN BE ALLOCATED BY ABAQUS WILL IN GENERAL DEPEND ON THE VALUE OF
+          THE "MEMORY" PARAMETER AND THE AMOUNT OF PHYSICAL MEMORY AVAILABLE ON THE MACHINE. PLEASE SEE
+          THE "ABAQUS ANALYSIS USER'S MANUAL" FOR MORE DETAILS. THE ACTUAL USAGE OF MEMORY AND OF DISK
+          SPACE FOR SCRATCH DATA WILL DEPEND ON THIS UPPER LIMIT AS WELL AS THE MEMORY REQUIRED TO MINIMIZE
+          I/O. IF THE MEMORY UPPER LIMIT IS GREATER THAN THE MEMORY REQUIRED TO MINIMIZE I/O, THEN THE ACTUAL
+          MEMORY USAGE WILL BE CLOSE TO THE ESTIMATED "MEMORY TO MINIMIZE I/O" VALUE, AND THE SCRATCH DISK
+          USAGE WILL BE CLOSE-TO-ZERO; OTHERWISE, THE ACTUAL MEMORY USED WILL BE CLOSE TO THE PREVIOUSLY
+          MENTIONED MEMORY LIMIT, AND THE SCRATCH DISK USAGE WILL BE ROUGHLY PROPORTIONAL TO THE DIFFERENCE
+          BETWEEN THE ESTIMATED "MEMORY TO MINIMIZE I/O" AND THE MEMORY UPPER LIMIT. HOWEVER ACCURATE
+          ESTIMATE OF THE SCRATCH DISK SPACE IS NOT POSSIBLE.
+      (6) USING "*RESTART, WRITE" CAN GENERATE A LARGE AMOUNT OF DATA WRITTEN IN THE WORK DIRECTORY.
+
+
+          THE ANALYSIS HAS BEEN COMPLETED
+
+
+
+                              ANALYSIS COMPLETE
+                              WITH      4 WARNING MESSAGES ON THE DAT FILE
+                              AND      23 WARNING MESSAGES ON THE MSG FILE
+                                       19 WARNINGS ARE FOR NEGATIVE EIGENVALUES
+
+
+
+     JOB TIME SUMMARY
+       USER TIME (SEC)      =   1.8000    
+       SYSTEM TIME (SEC)    =  0.60000    
+       TOTAL CPU TIME (SEC) =   2.4000    
+       WALLCLOCK TIME (SEC) =          6

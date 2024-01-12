@@ -1,0 +1,46 @@
+Analysis initiated from SIMULIA established products
+Abaqus JOB noH-ts
+Abaqus 3DEXPERIENCE R2018x
+Abaqus License Manager checked out the following licenses:
+Abaqus/Standard checked out 5 tokens from Flexnet server lic-abaqus.aalto.fi.
+<87 out of 100 licenses remain available>.
+Begin Compiling Abaqus/Standard User Subroutines
+11/7/2023 12:36:55 PM
+Intel(R) Fortran Intel(R) 64 Compiler Classic for applications running on Intel(R) 64, Version 2021.10.0 Build 20230609_000000
+Copyright (C) 1985-2023 Intel Corporation.  All rights reserved.
+
+ts.f(1): error #5149: Illegal character in statement label field  [.]
+../../abafortran/ts/ts.f
+^
+ts.f(1): error #5149: Illegal character in statement label field  [.]
+../../abafortran/ts/ts.f
+-^
+ts.f(1): error #5149: Illegal character in statement label field  [/]
+../../abafortran/ts/ts.f
+--^
+ts.f(1): error #5149: Illegal character in statement label field  [.]
+../../abafortran/ts/ts.f
+---^
+ts.f(1): error #5149: Illegal character in statement label field  [.]
+../../abafortran/ts/ts.f
+----^
+ts.f(1): error #5118: First statement in file must not be continued
+../../abafortran/ts/ts.f
+-----^
+ts.f(1): error #5082: Syntax error, found '/' when expecting one of: ( : % [ . = =>
+../../abafortran/ts/ts.f
+----------------^
+ts.f(1): error #5082: Syntax error, found END-OF-FILE when expecting one of: <LABEL> <END-OF-STATEMENT> ; <IDENTIFIER> TYPE MODULE ELEMENTAL IMPURE NON_RECURSIVE ...
+../../abafortran/ts/ts.f
+------------------------^
+ts.f(1): error #6535: This variable or component must be of a derived or structure type.   [TS]
+../../abafortran/ts/ts.f
+--------------------^
+compilation aborted for ts.f (code 1)
+Abaqus Error: Problem during compilation - ts.f
+Begin Convert MFS to SFS
+11/7/2023 12:36:58 PM
+Run SMASimUtility.exe
+11/7/2023 12:36:58 PM
+End Convert MFS to SFS
+Abaqus/Analysis exited with errors
